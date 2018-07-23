@@ -1,6 +1,8 @@
 from setuptools import setup
 
 DESC = """
+curl with pretty JSON outputs.
+
 Home Page: https://github.com/mitnk/curljson
 
 Install
@@ -13,9 +15,12 @@ Install
 Usages
 ------
 
+Use as curl:
+
 ::
 
     $ curljson -i https://httpbin.org/get
+
     HTTP/1.1 200 OK
     Connection: keep-alive
     Server: gunicorn/19.8.1
@@ -38,6 +43,10 @@ Usages
         "url": "https://httpbin.org/get"
     }
 
+Pretty json format via stdin:
+
+    ::
+
     $ echo '{"bin": "curl", "lang": "Python"}' | curljson
     {
         "lang": "Python",
@@ -47,7 +56,7 @@ Usages
 
 setup(
     name='curljson',
-    version='0.9.1',
+    version='0.9.3',
 
     description='curl with pretty json outputs',
     long_description=DESC,
