@@ -1,9 +1,9 @@
 from setuptools import setup
 
 DESC = """
-curl with pretty JSON outputs.
-
 Home Page: https://github.com/mitnk/curljson
+
+curl with pretty JSON outputs.
 
 Install
 -------
@@ -15,7 +15,7 @@ Install
 Usages
 ------
 
-Use as curl:
+Use as curl
 
 ::
 
@@ -43,9 +43,9 @@ Use as curl:
         "url": "https://httpbin.org/get"
     }
 
-Pretty json format via stdin:
+Pretty json format via stdin
 
-    ::
+::
 
     $ echo '{"bin": "curl", "lang": "Python"}' | curljson
     {
@@ -56,7 +56,7 @@ Pretty json format via stdin:
 
 setup(
     name='curljson',
-    version='0.9.3',
+    version='0.9.5',
 
     description='curl with pretty json outputs',
     long_description=DESC,
