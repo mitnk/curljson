@@ -14,6 +14,7 @@ Use as `curl`:
 
 ```
 $ curljson -i https://httpbin.org/get
+
 HTTP/1.1 200 OK
 Connection: keep-alive
 Server: gunicorn/19.8.1
