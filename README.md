@@ -1,6 +1,6 @@
 # curljson
 
-curl with pretty json outputs.
+curl with pretty JSON outputs.
 
 ## Install
 
