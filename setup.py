@@ -5,12 +5,16 @@ Home Page: https://github.com/mitnk/curljson
 
 Install
 -------
+
 ::
+
     $ pip install curljson
 
 Usages
 ------
+
 ::
+
     $ curljson -i https://httpbin.org/get
     HTTP/1.1 200 OK
     Connection: keep-alive
@@ -43,7 +47,7 @@ Usages
 
 setup(
     name='curljson',
-    version='0.9.0',
+    version='0.9.1',
 
     description='curl with pretty json outputs',
     long_description=DESC,
