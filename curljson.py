@@ -7,8 +7,8 @@ import fileinput
 def get_cmd_output(cmd):
     return subprocess.check_output(
         cmd,
-        stderr=subprocess.STDOUT,
-    ).decode()
+        stderr=subprocess.PIPE,
+    )
 
 
 def main():
@@ -17,14 +17,18 @@ def main():
         stream_func = fileinput.input
         stream_args = []
     else:
-        if '-s' not in cmd:
-            cmd.append('-s')
-        if '-L' not in cmd:
-            cmd.append('-L')
+        for opt in ('-s', '-S', '-L'):
+            if opt not in cmd:
+                cmd.append(opt)
         try:
             output = get_cmd_output(cmd)
+            output = output.decode(errors='replace')
         except subprocess.CalledProcessError as e:
-            print('CalledProcessError: {}'.format(e))
+            try:
+                print(e.stderr.decode(errors='replace').strip())
+            except AttributeError:
+                # e.stderr only available in PY3
+                print('{}'.format(e))
             exit(e.returncode)
         stream_func = output.strip().split
         stream_args = ['\n', ]
