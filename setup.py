@@ -56,7 +56,7 @@ Pretty json format via stdin
 
 setup(
     name='curljson',
-    version='0.9.7',
+    version='0.9.8',
 
     description='curl with pretty json outputs',
     long_description=DESC,

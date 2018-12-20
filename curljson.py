@@ -64,7 +64,7 @@ def main():
     except ValueError:
         print(json_str)
     else:
-        print(json.dumps(result, indent=4))
+        print(json.dumps(result, indent=4, sort_keys=True))
 
 
 if __name__ == '__main__':
