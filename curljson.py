@@ -1,7 +1,7 @@
-import subprocess
-import json
-import sys
 import fileinput
+import json
+import subprocess
+import sys
 
 
 def get_cmd_output(cmd):
@@ -33,36 +33,35 @@ def main():
         stream_func = output.strip().split
         stream_args = ['\n', ]
 
-    response_spliter_found = False
-    raw_lines = []
-    json_str = ''
+    header_lines = []
+    body_str = ''
+    body_lines = []
+    http_version_found = False
 
     for line in stream_func(*stream_args):
         line = line.strip()
-        if len(line.replace('\r', '')) == 0:
-            response_spliter_found = True
-            raw_lines.append('\n')
-        elif line.startswith(r'HTTP/'):
-            response_spliter_found = False
+        if line.startswith(r'HTTP/'):
+            http_version_found = True
 
-        if response_spliter_found:
-            json_str += line
+        if http_version_found and not line.replace('\r', ''):
+            header_lines.append('\n')
+            http_version_found = False
+
+        if http_version_found:
+            header_lines.append(line)
         else:
-            raw_lines.append(line)
+            body_str += line
+            body_lines.append(line)
 
-    if response_spliter_found:
-        for line in raw_lines:
-            if line == '\n':
-                print('')
-            else:
-                print(line)
-    else:
-        json_str = '\n'.join(raw_lines)
+    if header_lines:
+        headers = '\n'.join(header_lines).replace('\n\n', '\n')
+        print(headers)
 
     try:
-        result = json.loads(json_str)
+        result = json.loads(body_str)
     except ValueError:
-        print(json_str)
+        body = '\n'.join(body_lines)
+        print(body.strip())
     else:
         print(json.dumps(result, indent=4, sort_keys=True))
 
